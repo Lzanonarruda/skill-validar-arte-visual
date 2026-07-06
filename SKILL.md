@@ -20,7 +20,7 @@ Esta skill nasceu como uma etapa de autoavaliação dentro de uma skill de gera�
 
 ## Acesso ao vault
 
-- **Lê:** caminho da imagem a validar, fornecido pelo usuário ou pela skill que chamou (qualquer PNG/JPG do vault — sem acoplamento a cliente ou estrutura de pastas específica)
+- **Lê:** a imagem a validar — caminho local, anexo, URL interna ou referência fornecida pela skill que chamou, conforme o ambiente de execução (sem acoplamento a cliente ou estrutura de pastas específica)
 - **Escreve:** nada
 - **Cria:** nada — o output é só o relatório de texto
 
@@ -32,12 +32,14 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente — não depende
 
 ## Protocolo
 
-1. Receber o caminho da imagem a validar (obrigatório) e, se disponível, o contexto de marca (paleta, tipografia, princípios de design) — usado no critério 7
-2. Abrir a imagem de verdade e observá-la — nunca avaliar só pelo código-fonte (HTML/CSS) que a gerou, mesmo que ele esteja disponível. Julgamento visual exige ver o resultado renderizado
-3. Avaliar os 12 critérios obrigatórios (abaixo), item por item
-4. Aplicar as 5 regras complementares (A–E)
-5. Montar o relatório no formato obrigatório (6 seções)
-6. Entregar o relatório. Se a chamada veio de outra skill, ela decide o que fazer com o resultado — esta skill não corrige a arte, só avalia
+1. Receber a imagem a validar — caminho local, anexo, URL interna ou referência fornecida pela skill chamadora
+2. Identificar o contexto disponível da peça: objetivo da arte, canal de publicação (feed, story, thumbnail, anúncio, carrossel, capa), público-alvo, elementos obrigatórios, restrições do pedido (manter cores, fontes, textos, imagem) e contexto de marca (paleta, tipografia, princípios de design — usado no critério 7). Se essas informações não estiverem disponíveis, avaliar com base no uso mais provável e registrar a limitação no relatório
+3. Abrir e observar a imagem **renderizada final** — nunca avaliar só pelo código-fonte, HTML, CSS, SVG, JSON ou prompt que gerou a peça. Esses materiais podem servir de apoio pra entender uma decisão, mas o julgamento visual precisa ser sobre o resultado percebido, não sobre a intenção do código
+4. Avaliar os 12 critérios obrigatórios (abaixo), item por item, sempre à luz do contexto identificado no passo 2 (o padrão de exigência muda conforme canal/objetivo — ver Regra F)
+5. Aplicar as 6 regras complementares (A–F)
+6. Classificar cada achado por severidade: **problema impeditivo** (compromete a publicação) · **ajuste recomendado** (melhora a peça, mas não impede publicar) · **microajuste opcional** (refinamento óptico, não necessário pra aprovar). Nunca solicitar nova versão quando só restarem microajustes opcionais
+7. Montar o relatório no formato obrigatório (6 seções)
+8. Entregar o relatório. Se a chamada veio de outra skill, ela decide o que fazer com o resultado — esta skill não corrige a arte, só avalia
 
 ### Critérios obrigatórios de validação
 
@@ -51,7 +53,7 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente — não depende
 8. **Qualidade da imagem** — a imagem está nítida, bem enquadrada e coerente com a mensagem? (se a foto-fonte tiver limitação real, ver Regra C)
 9. **Acabamento visual** — sombras, cantos, bordas, logo, proporções e posicionamento parecem finalizados, não improvisados?
 10. **Equilíbrio visual** — os elementos têm pesos proporcionais? Nem CTA, nem título, nem foto, nem logo dominam ou desaparecem de forma incoerente?
-11. **Chamada para ação** — o CTA é claro, visível, e parece consequência natural da peça — não um bloco desconectado?
+11. **Chamada para ação** — se a peça tiver CTA (nem toda tem, ver regra de obrigatoriedade condicional), ele é claro, visível, e parece consequência natural da peça — não um bloco desconectado?
 12. **Percepção de confiança** — a arte transmite profissionalismo, organização, credibilidade e coerência com o objetivo da marca?
 
 ### Regras complementares
@@ -66,6 +68,8 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente — não depende
 
 **E — Bonita não é sinônimo de aprovada.** Só aprovar quando a arte parecer coesa, intencional, legível, equilibrada e bem acabada. Cumprir os 12 critérios isoladamente não basta se os blocos não se relacionarem bem entre si (ver critério 10 — Equilíbrio visual).
 
+**F — Estilo visual intencional não é erro.** Uma arte pode ser assimétrica, editorial, tipo colagem, popular, ousada ou expressiva e ainda ser profissional, desde que a escolha pareça coerente, legível, funcional e alinhada ao objetivo/canal identificado no passo 2 do protocolo. O problema não é fugir da grade clássica — é parecer acidental, desorganizado ou improvisado. Antes de reprovar por "falta de alinhamento" ou "hierarquia incomum", considerar se aquilo é uma escolha de estilo coerente com o contexto (ex: thumbnail de YouTube aceita contraste/exagero maior que post institucional; story aceita CTA mais forte; post de prova social pode depender mais da foto que do texto).
+
 ### Formato obrigatório da resposta
 
 Responder sempre com estas 6 seções, nesta ordem exata:
@@ -76,7 +80,7 @@ Responder sempre com estas 6 seções, nesta ordem exata:
 
 **3. Avaliação por critério** — para cada um dos 12 critérios: Status, o que cumpre ou não cumpre, por que, e o que é necessário pra cumprir (se houver ajuste)
 
-**4. Ajustes prioritários** — separados em Prioridade alta / Prioridade média / Prioridade baixa. Se não houver ajustes relevantes, declarar explicitamente que a arte está pronta pra publicação
+**4. Ajustes prioritários** — separados em Prioridade alta (problema impeditivo — compromete a publicação) / Prioridade média (ajuste recomendado — melhora a peça, mas não impede publicar) / Prioridade baixa (microajuste opcional — refinamento óptico). Nunca solicitar nova versão só por causa de itens de prioridade baixa. Se não houver ajustes de prioridade alta ou média, declarar explicitamente que a arte está pronta pra publicação
 
 **5. Observações sobre a imagem-fonte** — se houver limitação real (selfie muito próxima, baixa margem ao redor das pessoas, enquadramento original restritivo), registrar aqui como limitação do insumo (ver Regra C) — nunca como defeito a corrigir à força no layout
 
@@ -84,9 +88,11 @@ Responder sempre com estas 6 seções, nesta ordem exata:
 
 ## Verificação
 
-- [ ] Abriu e observou a imagem de verdade (não só o código-fonte)
-- [ ] Os 12 critérios foram avaliados individualmente, com status explícito
-- [ ] As 5 regras complementares (A–E) foram checadas
+- [ ] Contexto da peça (objetivo, canal, público, elementos obrigatórios, restrições) foi identificado ou a limitação de não tê-lo foi registrada
+- [ ] Abriu e observou a imagem renderizada final (não só o código-fonte)
+- [ ] Os 12 critérios foram avaliados individualmente, com status explícito, à luz do contexto identificado
+- [ ] As 6 regras complementares (A–F) foram checadas
+- [ ] Cada achado foi classificado por severidade (impeditivo / recomendado / microajuste opcional)
 - [ ] O relatório segue as 6 seções, na ordem exata
 - [ ] Limitação de imagem-fonte (se houver) foi registrada como observação, não como defeito forçado
 
@@ -96,4 +102,6 @@ Responder sempre com estas 6 seções, nesta ordem exata:
 
 **Sem contexto de marca disponível:** se não houver paleta, tipografia ou princípios de design fornecidos, avaliar o critério 7 (Consistência visual) só pela coerência interna da peça (as cores e fontes usadas conversam entre si), sem comparar contra um padrão de marca externo. Registrar essa limitação na Avaliação por critério.
 
-**Quando usar veredito "Reprovada":** reservar para casos graves — rosto cortado de forma desconfortável (Regra B), mensagem incompreensível, texto ilegível, ausência de elemento obrigatório (ex: logo, CTA). A maioria dos ajustes de refinamento cabe em "Solicitar ajustes antes de aprovar", não em reprovação total.
+**Quando usar veredito "Reprovada":** reservar para casos graves — mensagem incompreensível, texto ilegível, corte desconfortável em rostos ou partes essenciais de pessoas (Regra B), desalinhamento estrutural grave, composição claramente improvisada, contraste que impede a leitura, ou ausência de um elemento definido como **obrigatório pelo briefing** (logo, CTA, data, preço, produto, identificação da marca — só quando o objetivo/canal/padrão de marca exige, não por padrão). A maioria dos ajustes de refinamento cabe em "Solicitar ajustes antes de aprovar" ou "Aprovada com observações", não em reprovação total.
+
+**CTA e logo não são obrigatórios por padrão.** Nem toda arte precisa de CTA — peças institucionais, comemorativas, informativas, topo de carrossel, posts de relacionamento, capas e thumbnails sem chamada comercial direta costumam não ter. Nem toda peça precisa de logo visível — ex: arte pra story com perfil já identificado, ou quando a marca aparece no cabeçalho da própria plataforma. Validar a obrigatoriedade desses elementos pelo contexto identificado no passo 2 do protocolo (objetivo, canal, briefing), nunca como regra fixa aplicada a toda arte.
