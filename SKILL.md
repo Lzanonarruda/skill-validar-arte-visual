@@ -70,7 +70,7 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 
 **F. Estilo visual intencional não é erro.** Uma arte pode ser assimétrica, editorial, tipo colagem, popular, ousada ou expressiva e ainda ser profissional, desde que a escolha pareça coerente, legível, funcional e alinhada ao objetivo/canal identificado no passo 2 do protocolo. O problema não é fugir da grade clássica, é parecer acidental, desorganizado ou improvisado. Antes de reprovar por "falta de alinhamento" ou "hierarquia incomum", considerar se aquilo é uma escolha de estilo coerente com o contexto (ex: thumbnail de YouTube aceita contraste/exagero maior que post institucional; story aceita CTA mais forte; post de prova social pode depender mais da foto que do texto).
 
-**G. Texto, dados e informações sensíveis precisam ser conferidos.** Além de avaliar legibilidade, verificar se há erros de português, acentuação, digitação, nome da marca, preço, data, horário, telefone, endereço, nomes próprios e qualquer informação sensível da peça. Se houver texto ilegível, dado contraditório, erro de grafia ou informação comercial suspeita, classificar como ajuste recomendado ou problema impeditivo, conforme a gravidade.
+**G. Texto, dados e informações sensíveis precisam ser conferidos.** Além de avaliar legibilidade, verificar se há erros de português, acentuação, digitação, nome da marca, preço, data, horário, telefone, endereço, nomes próprios e qualquer informação sensível da peça. Se houver texto ilegível, dado contraditório, erro de grafia ou informação comercial suspeita, classificar como ajuste recomendado ou problema impeditivo, conforme a gravidade. Quando um dado (preço, telefone, horário, endereço, nome próprio) não puder ser verificado contra uma fonte confiável, avaliar só a consistência visual e aparente (formatação, coerência interna, ausência de contradição óbvia). Se houver suspeita de erro sem confirmação possível, registrar como ponto de conferência humana no relatório, nunca afirmar que o dado está correto sem base pra isso.
 
 **H. Respeitar formato, corte e área segura do canal.** Avaliar se a arte respeita o formato provável de publicação e se textos, logos, rostos, CTA e informações importantes não estão próximos demais das bordas ou em áreas que podem ser cortadas pela plataforma. Para story e reels, considerar áreas ocupadas pela interface do aplicativo. Para feed e carrossel, considerar leitura em miniatura e cortes de prévia. Para thumbnail, considerar impacto em tamanho reduzido.
 
@@ -86,13 +86,26 @@ Responder sempre com estas 6 seções, nesta ordem exata:
 
 **2. Veredito final**: uma decisão, `Aprovada` / `Aprovada com observações` / `Solicitar ajustes antes de aprovar` / `Reprovada`
 
-**3. Avaliação por critério**: para cada um dos 12 critérios, informar Status, o que cumpre ou não cumpre, por que, e o que é necessário pra cumprir (se houver ajuste)
+**3. Avaliação por critério**: para cada um dos 12 critérios, informar Status (`Cumpre` / `Cumpre parcialmente` / `Não cumpre` / `Não aplicável`), o que cumpre ou não cumpre, por que, e o que é necessário pra cumprir (se houver ajuste). Usar `Não aplicável` quando o critério não fizer sentido pra peça analisada (ex: critério 11, Chamada para ação, numa arte institucional sem CTA) em vez de forçar "cumpre" em algo que não existe
 
 **4. Ajustes prioritários**: separados em Prioridade alta (problema impeditivo, compromete a publicação), Prioridade média (ajuste recomendado, melhora a peça mas não impede publicar) e Prioridade baixa (microajuste opcional, refinamento óptico). Nunca solicitar nova versão só por causa de itens de prioridade baixa. Se não houver ajustes de prioridade alta ou média, declarar explicitamente que a arte está pronta pra publicação
 
 **5. Observações sobre a imagem-fonte**: se houver limitação real (selfie muito próxima, baixa margem ao redor das pessoas, enquadramento original restritivo), registrar aqui como limitação do insumo (ver Regra C), nunca como defeito a corrigir à força no layout
 
 **6. Conclusão final**: frase objetiva dizendo se a arte pode ser publicada ou não, e por quê
+
+### Resumo decisório (adicional, só quando chamada por outra skill)
+
+Além do relatório completo de 6 seções, quando `validar-arte-visual` for invocada por outra skill (não diretamente pelo usuário), incluir ao final um bloco curto pra decisão automática:
+
+```
+Veredito final: [Aprovada / Aprovada com observações / Solicitar ajustes antes de aprovar / Reprovada]
+Há problema impeditivo? [sim/não]
+Há ajuste recomendado? [sim/não]
+Pode apresentar a arte ao usuário nesse estado? [sim/não]
+```
+
+Isso permite que a skill chamadora decida rapidamente se corrige e chama de novo, ou se segue pro fluxo de apresentação, sem precisar reprocessar o relatório completo pra extrair essa decisão.
 
 ## Verificação
 
@@ -101,12 +114,13 @@ Responder sempre com estas 6 seções, nesta ordem exata:
 - [ ] Os 12 critérios foram avaliados individualmente, com status explícito, à luz do contexto identificado
 - [ ] As 10 regras complementares (A–J) foram checadas
 - [ ] Cada achado foi classificado por severidade (impeditivo / recomendado / microajuste opcional)
-- [ ] O relatório segue as 6 seções, na ordem exata
+- [ ] O relatório segue as 6 seções, na ordem exata (mais o resumo decisório, se a chamada veio de outra skill)
 - [ ] Limitação de imagem-fonte (se houver) foi registrada como observação, não como defeito forçado
+- [ ] Dados não verificáveis (preço, telefone, horário, endereço, nome próprio) foram avaliados só por consistência aparente, sem afirmar correção sem base
 
 ## Casos especiais
 
-**Chamada por outra skill (não diretamente pelo usuário):** devolver o relatório completo pra skill que chamou. Essa skill decide se corrige a arte e chama de novo, ou se repassa o relatório ao usuário. `validar-arte-visual` não decide isso sozinha, só avalia.
+**Chamada por outra skill (não diretamente pelo usuário):** devolver o relatório completo mais o resumo decisório (ver Formato obrigatório da resposta) pra skill que chamou. Essa skill decide se corrige a arte e chama de novo, ou se repassa o relatório ao usuário. `validar-arte-visual` não decide isso sozinha, só avalia.
 
 **Sem contexto de marca disponível:** se não houver paleta, tipografia ou princípios de design fornecidos, avaliar o critério 7 (Consistência visual) só pela coerência interna da peça (as cores e fontes usadas conversam entre si), sem comparar contra um padrão de marca externo. Registrar essa limitação na Avaliação por critério.
 
