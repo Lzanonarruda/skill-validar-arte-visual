@@ -45,12 +45,12 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 
 1. **Clareza da mensagem**: a arte comunica rapidamente o tema principal? A pessoa entende sem esforço o que está sendo mostrado e qual é a informação central?
 2. **Hierarquia visual**: existe ordem clara de leitura? A composição guia o olhar naturalmente entre imagem, título, texto de apoio, CTA e assinatura da marca?
-3. **Alinhamento**: os elementos parecem posicionados com intenção? Margens, consistência de grade visual, ausência de elementos soltos?
+3. **Alinhamento**: os elementos parecem posicionados com intenção? Margens, consistência de grade visual, ausência de elementos soltos? Atenção especial a número/símbolo grande ao lado de texto (ex: número gigante + palavra): devem se ler como uma unidade só, não como um elemento "flutuando" desalinhado do resto por estar num bloco visual separado
 4. **Espaçamento e respiro**: a arte não parece apertada nem vazia demais? Os espaços ajudam a leitura, a separação entre blocos e a sensação de acabamento?
 5. **Legibilidade**: o texto é fácil de ler no celular? Tamanho de fonte, contraste, peso visual, entrelinha, leitura rápida?
 6. **Contraste**: as cores ajudam a leitura e o destaque das informações mais importantes, sem competir entre si?
 7. **Consistência visual**: a arte parece parte da identidade da marca? Coerência entre cores, fontes, formas, assinatura visual e estilo geral?
-8. **Qualidade da imagem**: a imagem está nítida, bem enquadrada e coerente com a mensagem? (se a foto-fonte tiver limitação real, ver Regra C)
+8. **Qualidade da imagem**: a imagem está nítida, bem enquadrada e coerente com a mensagem? (se a foto-fonte tiver limitação real, ver Regra C). Se a imagem estiver dentro de um container com `object-fit:cover` (ou equivalente), checar se a proporção do container corta conteúdo essencial — texto de um print cortado no meio da frase é o caso mais comum e mais fácil de deixar passar, porque a imagem "parece" só levemente enquadrada, não obviamente quebrada
 9. **Acabamento visual**: sombras, cantos, bordas, logo, proporções e posicionamento parecem finalizados, não improvisados?
 10. **Equilíbrio visual**: os elementos têm pesos proporcionais? Nem CTA, nem título, nem foto, nem logo dominam ou desaparecem de forma incoerente?
 11. **Chamada para ação**: se a peça tiver CTA (nem toda tem, ver regra de obrigatoriedade condicional), ele é claro, visível, e parece consequência natural da peça, não um bloco desconectado?
