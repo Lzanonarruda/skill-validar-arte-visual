@@ -36,7 +36,7 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 2. Identificar o contexto disponível da peça: objetivo da arte, canal de publicação (feed, story, thumbnail, anúncio, carrossel, capa), público-alvo, elementos obrigatórios, restrições do pedido (manter cores, fontes, textos, imagem) e contexto de marca (paleta, tipografia, princípios de design, usado no critério 7). Se essas informações não estiverem disponíveis, avaliar com base no uso mais provável e registrar a limitação no relatório
 3. Abrir e observar a imagem **renderizada final**. Nunca avaliar só pelo código-fonte, HTML, CSS, SVG, JSON ou prompt que gerou a peça: esses materiais podem servir de apoio pra entender uma decisão, mas o julgamento visual precisa ser sobre o resultado percebido, não sobre a intenção do código. Se não for possível abrir/observar a imagem, aplicar a Regra J e interromper
 4. Avaliar os 12 critérios obrigatórios (abaixo), item por item, sempre à luz do contexto identificado no passo 2 (o padrão de exigência muda conforme canal/objetivo, ver Regra F)
-5. Aplicar as 11 regras complementares (A–K)
+5. Aplicar as 12 regras complementares (A–L)
 6. Classificar cada achado por severidade: **problema impeditivo** (compromete a publicação), **ajuste recomendado** (melhora a peça, mas não impede publicar), **microajuste opcional** (refinamento óptico, não necessário pra aprovar). Nunca solicitar nova versão quando só restarem microajustes opcionais
 7. Montar o relatório no formato obrigatório (6 seções)
 8. Entregar o relatório. Se a chamada veio de outra skill, ela decide o que fazer com o resultado: esta skill não corrige a arte, só avalia
@@ -80,6 +80,8 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 
 **K. Medir, não só olhar, quando houver dúvida real de sobreposição.** Um screenshot pode disfarçar uma sobreposição pequena (poucos pixels na resolução de preview viram uma faixa visível na exportação final em escala maior). Sempre que a peça tiver elementos posicionados de forma absoluta/flutuante (badge, pill, selo, tag) próximos de outro bloco (card, foto, print) e não for óbvio à primeira vista que há folga suficiente entre eles, e o ambiente permitir (HTML de origem acessível via ferramenta de browser), medir as caixas delimitadoras dos elementos envolvidos antes de declarar `Cumpre` no critério 3 ou 9. Essa regra existe porque uma autoavaliação já aprovou uma peça com uma pill flutuante cruzando a borda de um print (10px verticais × 177px horizontais de sobreposição real) só por ter "parecido certa" no preview — confiar na leitura visual sozinha não é suficiente quando o layout usa posicionamento absoluto.
 
+**L. Ler o texto como se fosse a primeira vez, sem o contexto que quem escreveu já tinha na cabeça, antes de aprovar o critério 1 (Clareza da mensagem).** Termos com polaridade que depende do contexto ("nota baixa", "abaixo de", "menor que", qualquer comparação numérica) podem soar exatamente o oposto do que a arte quer dizer pra quem lê sem saber de antemão qual é o sentido pretendido. Uma frase pode passar despercebida por quem já conhece a intenção (porque completa mentalmente o sentido certo) e ainda assim confundir o público real. Antes de marcar `Cumpre` no critério 1, reler a frase isolada do resto do contexto do briefing e perguntar: se essa palavra/número pudesse significar o oposto do que a peça quer, o texto deixa isso claro sozinho, ou depende de quem lê já saber a resposta? Essa regra existe porque uma autoavaliação já aprovou um texto ("nota baixa nas infrações" quando o sentido pretendido era o oposto do que "nota baixa" normalmente sugere) que só o Léo, lendo sem o contexto que a IA já tinha internalizado, percebeu como confuso.
+
 ### Formato obrigatório da resposta
 
 Responder sempre com estas 6 seções, nesta ordem exata:
@@ -114,7 +116,7 @@ Isso permite que a skill chamadora decida rapidamente se corrige e chama de novo
 - [ ] Contexto da peça (objetivo, canal, público, elementos obrigatórios, restrições) foi identificado ou a limitação de não tê-lo foi registrada
 - [ ] Abriu e observou a imagem renderizada final (não só o código-fonte); se não foi possível, aplicou a Regra J
 - [ ] Os 12 critérios foram avaliados individualmente, com status explícito, à luz do contexto identificado
-- [ ] As 11 regras complementares (A–K) foram checadas
+- [ ] As 12 regras complementares (A–L) foram checadas
 - [ ] Se a peça tem elemento flutuante/absoluto próximo de outro bloco e a folga não é óbvia, as caixas delimitadoras foram medidas (Regra K) antes de aprovar os critérios 3 e 9
 - [ ] Cada achado foi classificado por severidade (impeditivo / recomendado / microajuste opcional)
 - [ ] O relatório segue as 6 seções, na ordem exata (mais o resumo decisório, se a chamada veio de outra skill)
