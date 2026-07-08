@@ -36,7 +36,7 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 2. Identificar o contexto disponível da peça: objetivo da arte, canal de publicação (feed, story, thumbnail, anúncio, carrossel, capa), público-alvo, elementos obrigatórios, restrições do pedido (manter cores, fontes, textos, imagem) e contexto de marca (paleta, tipografia, princípios de design, usado no critério 7). Se essas informações não estiverem disponíveis, avaliar com base no uso mais provável e registrar a limitação no relatório
 3. Abrir e observar a imagem **renderizada final**. Nunca avaliar só pelo código-fonte, HTML, CSS, SVG, JSON ou prompt que gerou a peça: esses materiais podem servir de apoio pra entender uma decisão, mas o julgamento visual precisa ser sobre o resultado percebido, não sobre a intenção do código. Se não for possível abrir/observar a imagem, aplicar a Regra J e interromper
 4. Avaliar os 12 critérios obrigatórios (abaixo), item por item, sempre à luz do contexto identificado no passo 2 (o padrão de exigência muda conforme canal/objetivo, ver Regra F)
-5. Aplicar as 10 regras complementares (A–J)
+5. Aplicar as 11 regras complementares (A–K)
 6. Classificar cada achado por severidade: **problema impeditivo** (compromete a publicação), **ajuste recomendado** (melhora a peça, mas não impede publicar), **microajuste opcional** (refinamento óptico, não necessário pra aprovar). Nunca solicitar nova versão quando só restarem microajustes opcionais
 7. Montar o relatório no formato obrigatório (6 seções)
 8. Entregar o relatório. Se a chamada veio de outra skill, ela decide o que fazer com o resultado: esta skill não corrige a arte, só avalia
@@ -45,14 +45,14 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 
 1. **Clareza da mensagem**: a arte comunica rapidamente o tema principal? A pessoa entende sem esforço o que está sendo mostrado e qual é a informação central?
 2. **Hierarquia visual**: existe ordem clara de leitura? A composição guia o olhar naturalmente entre imagem, título, texto de apoio, CTA e assinatura da marca?
-3. **Alinhamento**: os elementos parecem posicionados com intenção? Margens, consistência de grade visual, ausência de elementos soltos? Atenção especial a número/símbolo grande ao lado de texto (ex: número gigante + palavra): devem se ler como uma unidade só, não como um elemento "flutuando" desalinhado do resto por estar num bloco visual separado
+3. **Alinhamento**: os elementos parecem posicionados com intenção? Margens, consistência de grade visual, ausência de elementos soltos? Atenção especial a número/símbolo grande ao lado de texto (ex: número gigante + palavra): devem se ler como uma unidade só, não como um elemento "flutuando" desalinhado do resto por estar num bloco visual separado. **Quando houver elemento posicionado de forma absoluta/flutuante sobre outro bloco (badge, pill, selo, tag sobre um card, foto ou print):** não aprovar como `Cumpre` só pela impressão visual do screenshot — se o ambiente permitir medir (ex: HTML de origem acessível via browser), verificar as caixas delimitadoras dos elementos que parecem próximos ou sobrepostos antes de decidir. Elemento flutuante que toca ou cruza a borda de outro bloco é sobreposição real, mesmo que pareça sutil no preview — não presumir que "está tudo bem" sem essa checagem quando o risco existe
 4. **Espaçamento e respiro**: a arte não parece apertada nem vazia demais? Os espaços ajudam a leitura, a separação entre blocos e a sensação de acabamento?
 5. **Legibilidade**: o texto é fácil de ler no celular? Tamanho de fonte, contraste, peso visual, entrelinha, leitura rápida?
 6. **Contraste**: as cores ajudam a leitura e o destaque das informações mais importantes, sem competir entre si?
 7. **Consistência visual**: a arte parece parte da identidade da marca? Coerência entre cores, fontes, formas, assinatura visual e estilo geral?
 8. **Qualidade da imagem**: a imagem está nítida, bem enquadrada e coerente com a mensagem? (se a foto-fonte tiver limitação real, ver Regra C). Se a imagem estiver dentro de um container com `object-fit:cover` (ou equivalente), checar se a proporção do container corta conteúdo essencial — texto de um print cortado no meio da frase é o caso mais comum e mais fácil de deixar passar, porque a imagem "parece" só levemente enquadrada, não obviamente quebrada
 9. **Acabamento visual**: sombras, cantos, bordas, logo, proporções e posicionamento parecem finalizados, não improvisados?
-10. **Equilíbrio visual**: os elementos têm pesos proporcionais? Nem CTA, nem título, nem foto, nem logo dominam ou desaparecem de forma incoerente?
+10. **Equilíbrio visual**: os elementos têm pesos proporcionais? Nem CTA, nem título, nem foto, nem logo dominam ou desaparecem de forma incoerente? Inclui coerência de escala entre textos vizinhos do mesmo bloco: um salto grande de tamanho entre dois elementos adjacentes sem transição (ex: citação decorativa gigante ao lado de uma legenda pequena) faz a composição parecer remendada, mesmo que cada um isoladamente esteja legível — preferir progressão de escala mais gradual entre blocos vizinhos
 11. **Chamada para ação**: se a peça tiver CTA (nem toda tem, ver regra de obrigatoriedade condicional), ele é claro, visível, e parece consequência natural da peça, não um bloco desconectado?
 12. **Percepção de confiança**: a arte transmite profissionalismo, organização, credibilidade e coerência com o objetivo da marca?
 
@@ -77,6 +77,8 @@ Nenhuma. Usa a capacidade nativa de leitura de imagem do agente, não depende de
 **I. Verificar artefatos visuais e erros de geração.** Quando a arte tiver imagem gerada, editada ou tratada por IA, verificar se há deformações, mãos estranhas, rostos artificiais, olhos desalinhados, dentes anormais, texto borrado, logotipo distorcido, objetos incoerentes, recortes ruins ou elementos visuais que reduzam a credibilidade da peça. Se o erro afetar pessoas, marca, texto, produto ou confiança da mensagem, tratar como problema impeditivo.
 
 **J. Não validar sem observar a imagem.** Se o ambiente de execução não permitir abrir ou visualizar a imagem renderizada final, interromper a validação e informar que não é possível emitir laudo visual confiável sem observar a peça. Nunca simular ou presumir uma avaliação visual a partir só de descrição, código-fonte ou intenção declarada.
+
+**K. Medir, não só olhar, quando houver dúvida real de sobreposição.** Um screenshot pode disfarçar uma sobreposição pequena (poucos pixels na resolução de preview viram uma faixa visível na exportação final em escala maior). Sempre que a peça tiver elementos posicionados de forma absoluta/flutuante (badge, pill, selo, tag) próximos de outro bloco (card, foto, print) e não for óbvio à primeira vista que há folga suficiente entre eles, e o ambiente permitir (HTML de origem acessível via ferramenta de browser), medir as caixas delimitadoras dos elementos envolvidos antes de declarar `Cumpre` no critério 3 ou 9. Essa regra existe porque uma autoavaliação já aprovou uma peça com uma pill flutuante cruzando a borda de um print (10px verticais × 177px horizontais de sobreposição real) só por ter "parecido certa" no preview — confiar na leitura visual sozinha não é suficiente quando o layout usa posicionamento absoluto.
 
 ### Formato obrigatório da resposta
 
@@ -112,7 +114,8 @@ Isso permite que a skill chamadora decida rapidamente se corrige e chama de novo
 - [ ] Contexto da peça (objetivo, canal, público, elementos obrigatórios, restrições) foi identificado ou a limitação de não tê-lo foi registrada
 - [ ] Abriu e observou a imagem renderizada final (não só o código-fonte); se não foi possível, aplicou a Regra J
 - [ ] Os 12 critérios foram avaliados individualmente, com status explícito, à luz do contexto identificado
-- [ ] As 10 regras complementares (A–J) foram checadas
+- [ ] As 11 regras complementares (A–K) foram checadas
+- [ ] Se a peça tem elemento flutuante/absoluto próximo de outro bloco e a folga não é óbvia, as caixas delimitadoras foram medidas (Regra K) antes de aprovar os critérios 3 e 9
 - [ ] Cada achado foi classificado por severidade (impeditivo / recomendado / microajuste opcional)
 - [ ] O relatório segue as 6 seções, na ordem exata (mais o resumo decisório, se a chamada veio de outra skill)
 - [ ] Limitação de imagem-fonte (se houver) foi registrada como observação, não como defeito forçado
@@ -125,5 +128,7 @@ Isso permite que a skill chamadora decida rapidamente se corrige e chama de novo
 **Sem contexto de marca disponível:** se não houver paleta, tipografia ou princípios de design fornecidos, avaliar o critério 7 (Consistência visual) só pela coerência interna da peça (as cores e fontes usadas conversam entre si), sem comparar contra um padrão de marca externo. Registrar essa limitação na Avaliação por critério.
 
 **Quando usar veredito "Reprovada":** reservar para casos graves: mensagem incompreensível, texto ilegível, corte desconfortável em rostos ou partes essenciais de pessoas (Regra B), desalinhamento estrutural grave, composição claramente improvisada, contraste que impede a leitura, artefato de geração por IA que compromete a credibilidade (Regra I), ou ausência de um elemento definido como **obrigatório pelo briefing** (logo, CTA, data, preço, produto, identificação da marca, só quando o objetivo/canal/padrão de marca exige, não por padrão). A maioria dos ajustes de refinamento cabe em "Solicitar ajustes antes de aprovar" ou "Aprovada com observações", não em reprovação total.
+
+**Sobreposição real entre blocos (elemento flutuante cruzando a borda de outro bloco) não é microajuste opcional.** Mesmo que pareça sutil no preview, classificar como problema impeditivo (prioridade alta) e usar "Solicitar ajustes antes de aprovar" — nunca "Aprovada" ou "Aprovada com observações". Ver Regra K para como confirmar antes de decidir.
 
 **CTA e logo não são obrigatórios por padrão.** Nem toda arte precisa de CTA: peças institucionais, comemorativas, informativas, topo de carrossel, posts de relacionamento, capas e thumbnails sem chamada comercial direta costumam não ter. Nem toda peça precisa de logo visível (ex: arte pra story com perfil já identificado, ou quando a marca aparece no cabeçalho da própria plataforma). Validar a obrigatoriedade desses elementos pelo contexto identificado no passo 2 do protocolo (objetivo, canal, briefing), nunca como regra fixa aplicada a toda arte.
